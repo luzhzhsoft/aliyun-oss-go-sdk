@@ -1,10 +1,12 @@
 // +build !go1.7
 
 // "golang.org/x/time/rate" is depended on golang context package  go1.7 onward
+// this file is only for build,not supports limit upload speed
 package oss
 
 import (
 	"fmt"
+	"io"
 )
 
 const (
@@ -15,6 +17,9 @@ type OssLimiter struct {
 }
 
 type BandLimitReader struct {
+	io.ReadCloser
+	reader     io.Reader
+	ossLimiter *OssLimiter
 }
 
 func GetOssLimiter(bandSpeed int) (ossLimiter *OssLimiter, err error) {

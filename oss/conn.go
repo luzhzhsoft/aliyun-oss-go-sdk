@@ -384,7 +384,7 @@ func (conn Conn) isUploadLimitReq(req *http.Request) bool {
 		return false
 	}
 
-	if req.Method != http.MethodGet && req.Method != http.MethodDelete && req.Method != http.MethodHead {
+	if req.Method != "GET" && req.Method != "DELETE" && req.Method != "HEAD" {
 		if req.ContentLength > 0 {
 			return true
 		}
